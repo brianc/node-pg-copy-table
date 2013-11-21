@@ -1,0 +1,32 @@
+{
+  "name": "pg-copy-table",
+  "version": "0.0.0",
+  "description": "streaming table copy from one postgres database to another",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brianc/node-pg-copy-table.git"
+  },
+  "keywords": [
+    "postgres",
+    "table",
+    "copy",
+    "pg",
+    "postgresql"
+  ],
+  "author": "Brian M. Carlson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brianc/node-pg-copy-table/issues"
+  },
+  "dependencies": {
+    "okay": "~0.3.0",
+    "pg-copy-streams": "~0.2.0"
+  }
+}
