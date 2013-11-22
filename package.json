@@ -1,6 +1,6 @@
 {
   "name": "pg-copy-table",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "streaming table copy from one postgres database to another",
   "main": "index.js",
   "directories": {
