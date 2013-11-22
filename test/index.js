@@ -71,6 +71,21 @@ describe('pg-copy-table', function() {
     })
   })
 
+  it('handles connection error', function(done) {
+    var config = {
+      from: {
+        database: 'alksjdflaksjdflaksdf'
+      },
+      to: {
+        database: 'lkasjldkfjlaksjdfadsf'
+      }
+    }
+    copy(config, function(err) {
+      assert(err)
+      done()
+    })
+  })
+
   it('handles error on from stream', function(done) {
     var config = {
       from: {
