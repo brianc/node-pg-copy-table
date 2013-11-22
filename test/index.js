@@ -53,7 +53,7 @@ describe('pg-copy-table', function() {
     var config = {
       from: {
         database: 'asdf',
-        query: 'SELECT generate_series as num from generate_series(0, 10)'
+        query: 'SELECT generate_series as num from generate_series(0, 1000)'
       },
       to: {
         database: 'postgres',
@@ -64,19 +64,21 @@ describe('pg-copy-table', function() {
       if(err) return done(err);
       query('postgres', 'SELECT COUNT(*) FROM blah', ok(done, function(res) {
         var rows = res.rows
-        assert.equal(rows[0].count, 11)
+        assert.equal(rows[0].count, 1001)
         require('pg.js').end()
         done()
       }))
     })
   })
 
-  it('handles error', function(done) {
+  it('handles error on from stream', function(done) {
     var config = {
       from: {
+        database: 'asdf',
         query: 'asdf'
       },
       to: {
+        database: 'asdf',
         table: 'blah'
       }
     }
@@ -85,6 +87,24 @@ describe('pg-copy-table', function() {
       done()
     })
   })
+
+  it('handles error on to stream', function(done) {
+    var config = {
+      from: {
+        database: 'asdf',
+        query: 'blah'
+      },
+      to: {
+        database: 'asdf',
+        table: 'asdfasdfasdf'
+      }
+    }
+    copy(config, function(err) {
+      assert(err)
+      done()
+    })
+  })
+
 
   it('connects to different databases', function(done) {
     var config = {
@@ -100,7 +120,7 @@ describe('pg-copy-table', function() {
     copy(config, ok(done, function() {
       query('asdf', 'SELECT COUNT(*) FROM blah', ok(done, function(res) {
         var row = res.rows[0]
-        assert.equal(row.count, 11)
+        assert.equal(row.count, 1001)
         done()
       }))
     }))
